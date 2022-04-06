@@ -1,0 +1,27 @@
+{
+  "name": "prepped",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpalmer-atx/prepped.git"
+  },
+  "author": "Chad Palmer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cpalmer-atx/prepped/issues"
+  },
+  "homepage": "https://github.com/cpalmer-atx/prepped#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
