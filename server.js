@@ -1,7 +1,10 @@
+const connectMongoDB = require('./database/db');
 const express = require('express');
 require('dotenv').config();
 
 const app = express();
+
+connectMongoDB();
 
 const users = require('./routes/users');
 
