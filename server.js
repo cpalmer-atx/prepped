@@ -8,10 +8,12 @@ const app = express();
 connectMongoDB();
 
 const users = require('./routes/users');
+const cards = require('./routes/cards');
 const auth = require('./routes/auth');
 
 app.use(express.json());
 app.use('/api/users', users);
+app.use('/api/cards', cards);
 app.use('/api/auth', auth);
 
 const PORT = process.env.PORT || 5500;
