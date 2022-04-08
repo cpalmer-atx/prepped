@@ -1,4 +1,5 @@
 const connectMongoDB = require('./database/db');
+const { default: mongoose } = require('mongoose');
 const express = require('express');
 require('dotenv').config();
 
@@ -15,4 +16,16 @@ app.use('/api/auth', auth);
 
 const PORT = process.env.PORT || 5500;
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`));
+const server = app.listen(PORT, () => 
+    console.log(`Server listening on port ${PORT}...`));
+
+const exit = () => {
+        server.close(() => {
+        mongoose.connection.close(false, () => {
+            console.log('\nServer and database connections closed.');
+        });
+    });
+
+};
+
+process.on('SIGINT', exit);
