@@ -30,6 +30,36 @@ exports.addCard = async (req, res) => {
 }
 
 
+exports.editCard = async (req, res) => {
+    const { id, question, answer } = req.body;
+    
+    try {
+        // Find user in database 
+        const user = await User.findById(req.user.id).select('-password');
+        if (!user) {
+            return res.status(400).json({ msg: 'No user found' });
+        }
+
+        // Find card to edit
+        const card = user.cards.find( cardToEdit => { return cardToEdit.id === id });
+        if (!card) {
+            return res.status(400).json({ msg: 'No card found' });
+        }
+        
+        // Set card parameters to new values if applicable and save user
+        card.question = question || card.question;
+        card.answer = answer || card.answer;
+        user.save();
+
+        // Return the edited card
+        return res.status(200).send(card);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send(err.message);
+    }
+}
+
+
 exports.deleteCard = async (req, res) => {
     const { id } = req.body;
     
