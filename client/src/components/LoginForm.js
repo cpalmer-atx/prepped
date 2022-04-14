@@ -36,9 +36,9 @@ const LoginForm = () => {
         </Typography>
         <form onSubmit={handleSubmit} autoComplete='false'>
             <TextField
-                name='username'
-                label='Name'
-                placeholder="username"
+                name='email'
+                label='Email'
+                placeholder="email address"
                 variant="outlined"
                 type='text'
                 // value={name}
