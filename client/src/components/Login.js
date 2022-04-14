@@ -1,14 +1,7 @@
-import styled from '@emotion/styled';
-import { Paper, Grid } from '@mui/material';
-import { Box, padding } from '@mui/system';
+import { Grid } from '@mui/material';
+import LoginForm from './LoginForm';
 import '../App.css';
 
-
-const Item = styled(Paper)( () => ({
-    backgroundColor: '#fff',
-    padding: 10,
-    textAlign: 'center'
-}));
 
 const Login = () => {
   return (
@@ -21,12 +14,7 @@ const Login = () => {
         justifyContent="center"
         style={{ minHeight: '90vh'}}
       >
-          <Item 
-            xs={10} 
-            elevation={24}
-          >
-              <h1>Reserved for Login Form what happens if this is long....</h1>
-          </Item> 
+          <LoginForm />
       </Grid>
   );
 }
