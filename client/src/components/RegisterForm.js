@@ -1,7 +1,6 @@
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from '@mui/icons-material/';
 import { useEffect, useState } from "react";
-
-
 
 
 const RegisterForm = () => {
@@ -12,9 +11,10 @@ const RegisterForm = () => {
         email: '',
         pwd: '',
         pwdConfirm: '',
-        pwdType: 'true',
+        pwdType: 'password',
+        pwdVisible: false
     });
-    const { username, email, pwd, pwdConfirm, pwdType } = form;
+    const { username, email, pwd, pwdConfirm, pwdType, pwdVisible } = form;
 
     useEffect( () => { 
         const missingFields = Object.values(form).some(key => key === '');
@@ -23,7 +23,13 @@ const RegisterForm = () => {
 
     const handleChange = (e, key) => {
         setForm({ ...form, [key]: e.target.value });
-    }
+    };
+
+    const setPwdVisible = (val) => {
+        setForm({ 
+            ...form, pwdVisible: val, pwdType: (val ? 'text' : 'password')
+        });
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +40,7 @@ const RegisterForm = () => {
         <div className="register-form">
             <h1>Register</h1>
             <><br/></>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} >
                 <TextField
                     name="username"
                     label="user name"
@@ -66,6 +72,20 @@ const RegisterForm = () => {
                     onChange={ (e) => handleChange(e, 'pwd') }
                     fullWidth
                     required
+                    InputProps={{
+                        autoComplete: 'new-password',
+                        endAdornment:(
+                            <InputAdornment position="end">
+                            <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={ () => setPwdVisible(!pwdVisible) }
+                            onMouseDown={(e) => e.preventDefault() }
+                            edge="end"
+                            >   {pwdVisible ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
                     // errorText='Error msg'
                 />
                 <><br/><br/></>
@@ -78,6 +98,10 @@ const RegisterForm = () => {
                     onChange={ (e) => handleChange(e, 'pwdConfirm') }
                     fullWidth
                     required
+                    InputProps={{
+                        autoComplete: 'new-password',
+                        
+                    }}
                     // errorText='Error msg'
                 />
                 <><br/><br/><br/></>
