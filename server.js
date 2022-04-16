@@ -1,6 +1,7 @@
 const connectMongoDB = require('./database/db');
 const { default: mongoose } = require('mongoose');
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
@@ -11,6 +12,7 @@ const users = require('./routes/users');
 const cards = require('./routes/cards');
 const auth = require('./routes/auth');
 
+app.use(cors());
 app.use(express.json());
 app.use('/api/users', users);
 app.use('/api/cards', cards);
